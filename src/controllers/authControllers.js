@@ -1,17 +1,14 @@
-// controllers/authController.js
-import User from '../models/User.js';
-import jwt from 'jsonwebtoken';
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { name, lastName, email, password } = req.body;
 
-    // Validaciones mínimas
     if (!name || !lastName || !email || !password) {
       return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
 
-    // Verificar email único
     const existing = await User.findOne({ email });
     if (existing) {
       return res.status(409).json({ error: 'El email ya está registrado' });
@@ -27,9 +24,8 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
-    // Login por email + password
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: 'Email y contraseña son requeridos' });
@@ -53,4 +49,5 @@ export const login = async (req, res) => {
   }
 };
 
-export default { register, login };
+module.exports = { register, login };
+

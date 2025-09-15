@@ -1,4 +1,4 @@
-import Dish from '../models/Dish.js';
+const Dish = require('../models/Dish');
 
 const getAll = async (req, res) => {
   try {
@@ -43,7 +43,7 @@ const remove = async (req, res) => {
   }
 };
 
-export default {
+module.exports = {
   getAll,
   create,
   update,
