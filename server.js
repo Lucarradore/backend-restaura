@@ -4,11 +4,22 @@ dotenv.config();
 const mongoose = require('mongoose');
 const app = require('./src/app');
 
-mongoose.connect(process.env.MONGO_URI)
+const PORT = process.env.PORT || 4000;
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.error("No se encontró la variable MONGO_URI en el archivo .env");
+  process.exit(1);
+}
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
-    console.log('Conexión a MongoDB exitosa');
-    app.listen(process.env.PORT || 4000, () => {
-      console.log(`Back-end escuchando en el puerto ${process.env.PORT || 4000}`);
+    console.log('Conexión a MongoDB Atlas exitosa');
+    app.listen(PORT, () => {
+      console.log(`Servidor escuchando en el puerto ${PORT}`);
     });
   })
   .catch(err => {
