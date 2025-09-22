@@ -1,6 +1,6 @@
 const Dish = require('../models/Dish');
 
-const getAll = async (req, res) => {
+const getAll = async (_, res) => {
   try {
     const dishes = await Dish.find();
     res.json(dishes);

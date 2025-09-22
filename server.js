@@ -21,6 +21,11 @@ mongoose.connect(MONGO_URI, {
     app.listen(PORT, () => {
       console.log(`Servidor escuchando en el puerto ${PORT}`);
     });
+
+    app.get('/', (_, res) => {
+  res.send('Backend Restaura funcionando');
+});
+
   })
   .catch(err => {
     console.error('Error al conectar a MongoDB:', err.message);

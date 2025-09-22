@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const getAll = async (req, res) => {
+const getAll = async (_, res) => {
   try {
     const users = await User.find().select('-password');
     res.json(users);
